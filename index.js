@@ -1,5 +1,9 @@
 const batteryBatches = [4, 5, 3, 4, 4, 6, 5];
 
+var totalBatteries = batteryBatches.reduce(function(total, batteryCount) {
+  return total + batteryCount
+}, 0)
+
 const monologueLines = [
   'Who are you talking to right now?',
   'Who is it you think you see?',
@@ -16,3 +20,16 @@ const monologueLines = [
   'No.',
   'I am the one who knocks!'
 ];
+
+var wordCountMap = monologueLines.reduce(wordCounter, {})
+// reduce takes a function that takes the current 'total' and one value at a time => wordCounter, and an initial 'total' => {}
+
+function wordCounter(count, sentence) {
+  var wordCount = sentence.split(" ").length.toString();
+  if (Object.keys(count).includes(wordCount)) {
+    ++count[wordCount]
+  } else {
+    count[wordCount] = 1
+  }
+  return count
+}
